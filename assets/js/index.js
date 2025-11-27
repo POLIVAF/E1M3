@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\[\]{};':"\\|,.<>\/?~-]).{8,20}$/;
 
     // =========================================================
-    // VALIDAR NOMBRE
+    // VALIDAR NOMBRE con bucle while
     // =========================================================
     let nombre = prompt("Ingrese su nombre completo:");
     while (true) {
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VALIDAR EMAIL
+    // VALIDAR EMAIL con bucle while
     // =========================================================
     let email = prompt("Ingrese su correo electrónico:");
     while (true) {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================================================
-    // VALIDAR PASSWORD
+    // VALIDAR PASSWORD con bucle while
     // =========================================================
     let password = prompt("Ingrese su contraseña:");
     while (true) {
