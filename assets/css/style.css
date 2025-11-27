@@ -1,46 +1,40 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
 body {
   font-family: Arial, sans-serif;
-  background: #f0f2f5;
-  padding: 20px;
-}
-
-h2 {
+  background: #f2f2f2;
   text-align: center;
-  margin-bottom: 20px;
+  padding-top: 50px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 25px;
-  background: #fff;
-  border: 1px solid #ccc;
+.container {
+  background: white;
+  width: 350px;
+  margin: auto;
+  padding: 20px;
   border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
 }
 
-label {
-  font-weight: bold;
-}
-
-input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
+/* Botón */
 button {
-  padding: 10px;
-  border: none;
-  background: #4361ee;
+  background: #007bff;
   color: white;
-  font-weight: bold;
-  border-radius: 6px;
+  padding: 12px 20px;
+  border: none;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: 0.3s;
 }
 
+button:hover {
+  background: #0056b3;
+}
+
+/* Mensajes */
 .error {
   color: red;
   font-size: 0.9rem;
