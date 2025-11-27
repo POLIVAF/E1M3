@@ -1,76 +1,100 @@
-const btn = document.getElementById("btnPrompt");
-const msgError = document.getElementById("mensajeError");
-const msgExito = document.getElementById("mensajeExito");
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("btnPrompt");
+  const msgError = document.getElementById("msgError");
+  const msgExito = document.getElementById("msgExito");
 
-btn.addEventListener("click", function () {
-  // Ocultar mensajes previos
-  msgError.style.display = "none";
-  msgExito.style.display = "none";
+  btn.addEventListener("click", function () {
+    // Limpiar mensajes visuales
+    msgError.textContent = "";
+    msgError.style.display = "none";
+    msgExito.textContent = "";
+    msgExito.style.display = "none";
 
-  // ===============================
-  // EXPRESIONES REGULARES
-  // ===============================
-  const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex =
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\[\]{};':"\\|,.<>\/?~-]).{8,20}$/;
+    // ===============================
+    // REGEX
+    // ===============================
+    const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\[\]{};':"\\|,.<>\/?~-]).{8,20}$/;
 
-  // ===============================
-  // CAPTURA DE DATOS CON PROMPT()
-  // ===============================
+    // ===============================
+    // NOMBRE (con reintentos)
+    // ===============================
+    let nombre = prompt("Ingrese su nombre completo:");
 
-  let nombre = prompt("Ingrese su nombre completo:");
-  let email = prompt("Ingrese su correo electrónico:");
-  let password = prompt("Ingrese su contraseña (mínimo 8 caracteres):");
+    while (true) {
+      if (nombre === null || nombre.trim() === "") {
+        alert("❌ El nombre no puede estar vacío.");
+        console.error("Error: Nombre vacío.");
+        nombre = prompt("Ingrese su nombre completo:");
+      } else if (!nombreRegex.test(nombre.trim())) {
+        alert("❌ El nombre solo puede contener letras.");
+        console.error("Error: Nombre con formato incorrecto.");
+        nombre = prompt("Ingrese un nombre válido (solo letras):");
+      } else {
+        console.log("✔ Nombre válido:", nombre);
+        break;
+      }
+    }
 
-  // ===============================
-  // VALIDACIONES
-  // ===============================
+    // ===============================
+    // EMAIL (con reintentos)
+    // ===============================
+    let email = prompt("Ingrese su correo electrónico:");
 
-  // Validar nombre
-  if (nombre === null || nombre.trim() === "") {
-    alert("❌ Error: El campo 'nombre' no puede estar vacío.");
-    msgError.textContent = "❌ Debe ingresar un nombre.";
-    msgError.style.display = "block";
-    return;
-  } else if (!nombreRegex.test(nombre.trim())) {
-    alert("❌ Error: El nombre solo puede contener letras y espacios.");
-    msgError.textContent = "❌ Nombre inválido (solo letras).";
-    msgError.style.display = "block";
-    return;
-  }
+    while (true) {
+      if (email === null || email.trim() === "") {
+        alert("❌ El correo no puede estar vacío.");
+        console.error("Error: Email vacío.");
+        email = prompt("Ingrese su correo electrónico:");
+      } else if (!emailRegex.test(email.trim())) {
+        alert(
+          "❌ Formato de correo inválido. Ejemplo correcto: usuario@gmail.com"
+        );
+        console.error("Error: Email con formato incorrecto.");
+        email = prompt("Ingrese un email válido:");
+      } else {
+        console.log("✔ Email válido:", email);
+        break;
+      }
+    }
 
-  // Validar email
-  if (email === null || email.trim() === "") {
-    alert("❌ Error: El campo 'email' no puede estar vacío.");
-    msgError.textContent = "❌ Debe ingresar un email.";
-    msgError.style.display = "block";
-    return;
-  } else if (!emailRegex.test(email.trim())) {
-    alert("❌ Error: El email no tiene un formato válido.");
-    msgError.textContent = "❌ Email inválido.";
-    msgError.style.display = "block";
-    return;
-  }
+    // ===============================
+    // PASSWORD (con reintentos)
+    // ===============================
+    let password = prompt("Ingrese su contraseña (8–20 caracteres):");
 
-  // Validar contraseña
-  if (password === null || password.trim() === "") {
-    alert("❌ Error: La contraseña no puede estar vacía.");
-    msgError.textContent = "❌ Debe ingresar una contraseña.";
-    msgError.style.display = "block";
-    return;
-  } else if (!passwordRegex.test(password)) {
-    alert(
-      "❌ Error: La contraseña debe tener 8–20 caracteres, 1 mayúscula, 1 número y 1 símbolo."
-    );
-    msgError.textContent = "❌ Contraseña insegura o incompleta.";
-    msgError.style.display = "block";
-    return;
-  }
+    while (true) {
+      if (password === null || password.trim() === "") {
+        alert("❌ La contraseña no puede estar vacía.");
+        console.error("Error: Contraseña vacía.");
+        password = prompt("Ingrese su contraseña:");
+      } else if (!passwordRegex.test(password)) {
+        alert(
+          "❌ Contraseña insegura: debe incluir MAYÚSCULA, número y símbolo."
+        );
+        console.error("Error: Contraseña insegura.");
+        password = prompt("Ingrese una contraseña válida (8–20 caracteres):");
+      } else {
+        console.log("✅ Contraseña válida");
+        break;
+      }
+    }
+    // ===============================
+    // SI TODO ES VÁLIDO
+    // ===============================
+    alert("✅ Registro exitoso. ¡Bienvenido, " + nombre + "!");
+    msgExito.textContent = "✅ Registro exitoso. Bienvenido, " + nombre + "!";
+    msgExito.style.display = "block";
 
-  
-  alert("✅ Registro exitoso. ¡Bienvenido, " + nombre + "!");
-  msgExito.textContent = "✔ Registro exitoso. Bienvenido, " + nombre + "!";
-  msgExito.style.display = "block";
-  console.log("✔ Registro exitoso. Usuario:", nombre);
+    console.log("✅ REGISTRO EXITOSO");
+    console.log("Usuario:", nombre);
+    console.log("Email:", email);
+
+    // Ocultar mensaje a los 4 segundos (4000 ms)
+    setTimeout(() => {
+      msgExito.style.display = "none";
+    }, 4000);
+  });
 });
